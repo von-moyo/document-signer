@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
+
 import { useEffect, useMemo, useRef } from "react";
 import { usePageContext } from "react-pdf";
 import invariant from "tiny-invariant";
 
-import type { RenderParameters } from "pdfjs-dist/types/src/display/api.js";
 
 export default function CustomRenderer() {
     const pageContext = usePageContext();
@@ -34,7 +35,7 @@ export default function CustomRenderer() {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        const renderContext: RenderParameters = {
+        const renderContext: any = {
             canvasContext: canvas.getContext("2d", { alpha: false }) as CanvasRenderingContext2D,
             viewport,
         };

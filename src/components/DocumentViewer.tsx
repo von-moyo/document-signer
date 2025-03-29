@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -61,6 +63,10 @@ export function DocumentViewer({ file, currentTool, annotations, setAnnotations 
     setSelectionStart(null);
   };
 
+  useEffect(() => (
+    setPageDimensions(pageDimensions)
+  ), [])
+
   return (
     <div className="p-4 overflow-auto max-h-[calc(100vh-12rem)] relative">
       <div className="flex justify-between items-center mb-2">
@@ -80,7 +86,7 @@ export function DocumentViewer({ file, currentTool, annotations, setAnnotations 
       >
         <Page
           pageNumber={pageNumber}
-          customRenderer={() => <CustomRenderer ref={canvasRef} />}
+          customRenderer={() => <CustomRenderer />}
           renderTextLayer={false}
           renderAnnotationLayer={false}
           onMouseDown={handleMouseDown}
@@ -110,7 +116,7 @@ export function DocumentViewer({ file, currentTool, annotations, setAnnotations 
   );
 }
 
-const AnnotationLayer = ({ annotations, pageDimensions, onDelete }: any) => {
+const AnnotationLayer = ({ annotations, pageDimensions }: any) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
